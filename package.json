@@ -1,0 +1,29 @@
+{
+    "name": "whocallsthefleet-pics",
+
+    "version": "1.0.0",
+
+    "description": "Pictures for Who Calls the Fleet (https://fleet.moe)",
+    "author": {
+        "name": "Diablohu",
+        "email": "diablohudream@gmail.com",
+        "url": "http://diablohu.com"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Diablohu/WhoCallsTheFleet-Pics"
+    },
+
+    "scripts": {
+        "start": "node ./src/ships.js && node ./src/ships-extra.js && node ./src/equipments"
+    },
+
+    "devDependencies": {
+        "fs-extra": "^3.0.1",
+        "yargs": "^8.0.1",
+        "eslint": "^3.19.0",
+        "glob": "^7.1.2",
+        "gm": "^1.23.0"
+    }
+}

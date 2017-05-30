@@ -24,13 +24,13 @@ const convert = async (id) => {
 
     console.log(`  ├── ${dir}`)
 
-    console.log(`  │       converting .jpg to .png...`)
     for (let file of glob.sync(path.join(dir, '*.jpg'))) {
         const parse = path.parse(file)
         const filePNG = path.join(dir, `${parse.name}.png`)
 
         if (fs.existsSync(filePNG)) continue
 
+        console.log(`  │       converting .jpg to .png...`)
         await new Promise((resolve, reject) => {
             gm(file)
                 .write(filePNG, err => {
@@ -41,7 +41,6 @@ const convert = async (id) => {
         })
     }
 
-    console.log(`  │       converting 0.png/1.png to .jpg...`)
     for (let filename of filenamesAvatar) {
         const parse = path.parse(filename)
         const filePNG = path.join(dir, `${parse.name}.png`)
@@ -49,6 +48,7 @@ const convert = async (id) => {
 
         if (fs.existsSync(fileJPG)) continue
 
+        console.log(`  │       converting 0.png/1.png to .jpg...`)
         await new Promise((resolve, reject) => {
             gm(filePNG)
                 .quality(75)
@@ -60,7 +60,6 @@ const convert = async (id) => {
         })
     }
 
-    console.log(`  │       applying mask to 0.png/1.png...`)
     for (let filename of filenamesAvatar) {
         const parse = path.parse(filename)
         const fileOriginal = path.join(dir, `${parse.name}.png`)
@@ -70,6 +69,7 @@ const convert = async (id) => {
 
             if (fs.existsSync(filePNG)) continue
 
+            console.log(`  │       applying mask to 0.png/1.png...`)
             await new Promise((resolve, reject) => {
                 exec(`composite -compose in "${fileOriginal}" ${fileMask} ${filePNG}`,
                     err => {
@@ -82,13 +82,13 @@ const convert = async (id) => {
         }
     }
 
-    console.log(`  │       converting .png to .webp...`)
     for (let file of glob.sync(path.join(dir, '*.png'))) {
         const parse = path.parse(file)
         const fileWEBP = path.join(dir, `${parse.name}.webp`)
 
         if (fs.existsSync(fileWEBP)) continue
 
+        console.log(`  │       converting .png to .webp...`)
         await new Promise((resolve, reject) => {
             gm(file)
                 .quality(qualityWebP)
@@ -100,10 +100,11 @@ const convert = async (id) => {
         })
     }
 
-    console.log(`  │       DONE!`)
+    // console.log(`  │       DONE!`)
 }
 
 const run = async () => {
+    console.log('')
     console.log('  Processing all ships\' illustrations...')
 
     for (let id of fs.readdirSync(dirShips).sort((a, b) => parseInt(a) - parseInt(b))) {

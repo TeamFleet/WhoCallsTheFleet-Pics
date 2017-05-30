@@ -16,7 +16,6 @@ const convert = async (id) => {
 
     console.log(`  ├── ${dir}`)
 
-    console.log(`  │       converting 8.png/9.png to .webp...`)
     for (let filename of filenamesNeedConvert) {
         const parse = path.parse(filename)
         const filePNG = path.join(dir, `${parse.name}.png`)
@@ -25,6 +24,7 @@ const convert = async (id) => {
         if (!fs.existsSync(filePNG)) continue
         if (fs.existsSync(fileWEBP)) continue
 
+        console.log(`  │       converting 8.png/9.png to .webp...`)
         await new Promise((resolve, reject) => {
             gm(filePNG)
                 .quality(qualityWebP)
@@ -36,10 +36,11 @@ const convert = async (id) => {
         })
     }
 
-    console.log(`  │       DONE!`)
+    // console.log(`  │       DONE!`)
 }
 
 const run = async () => {
+    console.log('')
     console.log('  Processing all ships-extra\' illustrations...')
 
     for (let id of fs.readdirSync(dirShipsExtra).sort((a, b) => parseInt(a) - parseInt(b))) {

@@ -16,10 +16,11 @@
     },
 
     "scripts": {
-        "start": "node ./src/ships.js && node ./src/ships-extra.js && node ./src/equipments"
+        "start": "node ./src/ships.js && node ./src/ships-extra.js && node ./src/equipments && node ./src/entities && node ./src/copy"
     },
 
     "devDependencies": {
+        "whocallsthefleet-database": "2017.5.31",
         "fs-extra": "^3.0.1",
         "yargs": "^8.0.1",
         "eslint": "^3.19.0",

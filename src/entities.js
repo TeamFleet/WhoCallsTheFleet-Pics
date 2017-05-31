@@ -6,7 +6,6 @@ const getDb = require('./helper/get-db.js')
 const exec = require('child_process').exec
 
 const dirEntities = path.join(__dirname, '../dist/entities')
-fs.ensureDirSync(dirEntities)
 
 const pathMask = {
     0: path.join(__dirname, './mask/mask-0.png'),
@@ -98,6 +97,8 @@ const convert = async (id) => {
 const run = async () => {
     console.log('')
     console.log('  Processing all entities\' pictures...')
+
+    fs.ensureDirSync(dirEntities)
 
     getDb('entities').forEach(data => {
         if (!data.picture || !data.picture.avatar) return

@@ -20,7 +20,7 @@
     },
 
     "devDependencies": {
-        "whocallsthefleet-database": "2017.5.31",
+        "whocallsthefleet-database": "2017.6.18",
         "fs-extra": "^3.0.1",
         "yargs": "^8.0.1",
         "eslint": "^3.19.0",

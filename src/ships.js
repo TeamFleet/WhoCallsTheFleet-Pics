@@ -71,7 +71,7 @@ const convert = async (id) => {
 
             console.log(`  │       applying mask to 0.png/1.png...`)
             await new Promise((resolve, reject) => {
-                exec(`composite -compose in "${fileOriginal}" ${fileMask} ${filePNG}`,
+                exec(`gm composite -compose in "${fileOriginal}" ${fileMask} ${filePNG}`,
                     err => {
                         if (err) reject(err)
                         console.log(`  │           ${parse.name}-${maskname}.png`)

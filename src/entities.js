@@ -57,12 +57,17 @@ const convert = async (id) => {
             let fileName = maskname ? `0-${maskname}.png` : `0.png`
             const filePNG = path.join(dir, `${fileName}`)
             const fileMask = pathMask[maskname]
+            const fileGeometry = path.join(dir, 'geometry.txt')
+            let geometry = '90x90+37-17'
 
             if (fs.existsSync(filePNG)) continue
+            if (fs.existsSync(fileGeometry)) {
+                geometry = fs.readFileSync(fileGeometry)
+            }
 
             console.log(`  │       applying mask to 0.png...`)
             await new Promise((resolve, reject) => {
-                exec(`composite -geometry 90x90+35-17 -compose in "${fileAvatarJPG}" ${fileMask} ${filePNG}`,
+                exec(`composite -geometry ${geometry} -compose in "${fileAvatarJPG}" ${fileMask} ${filePNG}`,
                     err => {
                         if (err) reject(err)
                         console.log(`  │           ${fileName}.png`)

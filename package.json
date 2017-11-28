@@ -1,7 +1,7 @@
 {
     "name": "whocallsthefleet-pics",
 
-    "version": "2017.11.19",
+    "version": "2017.11.29",
 
     "description": "Pictures for Who Calls the Fleet (https://fleet.moe)",
     "author": {
@@ -12,7 +12,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Diablohu/WhoCallsTheFleet-Pics"
+        "url": "https://github.com/TeamFleet/WhoCallsTheFleet-Pics"
     },
 
     "scripts": {

@@ -40,4 +40,4 @@ func._default = async (type) => {
     })
 }
 
-run()
+// run()

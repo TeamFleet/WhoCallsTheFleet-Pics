@@ -3,11 +3,22 @@ const fs = require('fs-extra')
 const gm = require('gm')
 const exec = require('child_process').exec
 const glob = require('glob')
+const sizeOf = require('image-size')
 
 const dirShips = path.join(__dirname, '../dist/ships')
-const pathMask = {
-    1: path.join(__dirname, './mask/mask-1.png'),
-    2: path.join(__dirname, './mask/mask-2.png')
+// const pathMask = {
+//     1: path.join(__dirname, './mask/mask-1.png'),
+//     2: path.join(__dirname, './mask/mask-2.png')
+// }
+const pathnameMasks = {
+    '160x40': {
+        1: path.resolve(__dirname, './mask/ship-banner-160x40-mask-1.png'),
+        2: path.resolve(__dirname, './mask/ship-banner-160x40-mask-2.png'),
+    },
+    '240x60': {
+        1: path.resolve(__dirname, './mask/ship-banner-240x60-mask-1.png'),
+        2: path.resolve(__dirname, './mask/ship-banner-240x60-mask-2.png'),
+    }
 }
 
 const qualityWebP = 100
@@ -41,31 +52,36 @@ const convert = async (id) => {
         })
     }
 
-    for (let filename of filenamesAvatar) {
-        const parse = path.parse(filename)
-        const filePNG = path.join(dir, `${parse.name}.png`)
-        const fileJPG = path.join(dir, `${parse.name}.jpg`)
+    // for (let filename of filenamesAvatar) {
+    //     const parse = path.parse(filename)
+    //     const filePNG = path.join(dir, `${parse.name}.png`)
+    //     const fileJPG = path.join(dir, `${parse.name}.jpg`)
 
-        if (fs.existsSync(fileJPG)) continue
+    //     if (fs.existsSync(fileJPG)) continue
 
-        console.log(`  │       converting 0.png/1.png to .jpg...`)
-        await new Promise((resolve, reject) => {
-            gm(filePNG)
-                .quality(75)
-                .write(fileJPG, err => {
-                    if (err) reject(err)
-                    console.log(`  │           ${parse.name}.jpg`)
-                    resolve()
-                })
-        })
-    }
+    //     console.log(`  │       converting 0.png/1.png to .jpg...`)
+    //     await new Promise((resolve, reject) => {
+    //         gm(filePNG)
+    //             .quality(75)
+    //             .write(fileJPG, err => {
+    //                 if (err) reject(err)
+    //                 console.log(`  │           ${parse.name}.jpg`)
+    //                 resolve()
+    //             })
+    //     })
+    // }
 
     for (let filename of filenamesAvatar) {
         const parse = path.parse(filename)
         const fileOriginal = path.join(dir, `${parse.name}.png`)
+        const dimensions = sizeOf(fileOriginal)
+        const size = `${dimensions.width}x${dimensions.height}`
+        const pathnameMask = typeof pathnameMasks[size] === 'object'
+            ? pathnameMasks[size]
+            : pathnameMasks["160x40"]
         for (let maskname of masks) {
             const filePNG = path.join(dir, `${parse.name}-${maskname}.png`)
-            const fileMask = pathMask[maskname]
+            const fileMask = pathnameMask[maskname]
 
             if (fs.existsSync(filePNG)) continue
 

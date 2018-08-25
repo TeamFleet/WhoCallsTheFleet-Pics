@@ -1,8 +1,6 @@
 {
     "name": "whocallsthefleet-pics",
-
     "version": "2018.08.01",
-
     "description": "Pictures for Who Calls the Fleet (https://fleet.moe)",
     "author": {
         "name": "Diablohu",
@@ -14,17 +12,17 @@
         "type": "git",
         "url": "https://github.com/TeamFleet/WhoCallsTheFleet-Pics"
     },
-
     "scripts": {
         "start": "node ./src/ships.js && node ./src/ships-extra.js && node ./src/equipments && node ./src/entities && node ./src/copy"
     },
-
     "devDependencies": {
-        "whocallsthefleet-database": "2017.6.18",
-        "fs-extra": "^3.0.1",
-        "yargs": "^8.0.1",
-        "eslint": "^3.19.0",
+        "whocallsthefleet-database": "2018.8.25",
+        "fs-extra": "^7.0.0",
+        "yargs": "^12.0.1",
         "glob": "^7.1.2",
-        "gm": "^1.23.0"
+        "gm": "^1.23.0",
+        "image-size": "^0.6.3",
+        "eslint": "^5.4.0",
+        "babel-eslint": "^8.2.6"
     }
 }

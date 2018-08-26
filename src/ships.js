@@ -74,11 +74,15 @@ const convert = async (id) => {
     for (let filename of filenamesAvatar) {
         const parse = path.parse(filename)
         const fileOriginal = path.join(dir, `${parse.name}.png`)
+
+        if (!fs.existsSync(fileOriginal)) continue
+
         const dimensions = sizeOf(fileOriginal)
         const size = `${dimensions.width}x${dimensions.height}`
         const pathnameMask = typeof pathnameMasks[size] === 'object'
             ? pathnameMasks[size]
             : pathnameMasks["160x40"]
+
         for (let maskname of masks) {
             const filePNG = path.join(dir, `${parse.name}-${maskname}.png`)
             const fileMask = pathnameMask[maskname]
